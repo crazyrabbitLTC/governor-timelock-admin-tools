@@ -20,6 +20,15 @@ task("deploy:Timelock")
     console.log("Timelock deployed to: ", timelock.address);
   });
 
+task("createData:Timelock")
+  .addParam("argTypes", "array of argument types")
+  .addParam("argValues", "array of argument values")
+  .setAction(async function (taskArgs: TaskArguments, hre) {
+    const { ethers } = hre;
+    const data = new ethers.utils.AbiCoder().encode(taskArgs.argTypes, taskArgs.argValues);
+    console.log(data);
+  });
+
 task("queue:tx")
   .addParam("timelock", "timelock address")
   .addParam("target", "target address")

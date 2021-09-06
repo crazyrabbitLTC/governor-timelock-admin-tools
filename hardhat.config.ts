@@ -2,6 +2,7 @@ import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "@nomiclabs/hardhat-etherscan";
 
 import "./tasks/accounts";
 import "./tasks/clean";
@@ -45,6 +46,8 @@ function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
       path: "m/44'/60'/0'/0",
     },
     chainId: chainIds[network],
+    gas: "auto",
+    gasPrice: "auto",
     url,
   };
 }
@@ -70,6 +73,7 @@ const config: HardhatUserConfig = {
     kovan: getChainConfig("kovan"),
     rinkeby: getChainConfig("rinkeby"),
     ropsten: getChainConfig("ropsten"),
+    mainnet: getChainConfig("mainnet"),
   },
   paths: {
     artifacts: "./artifacts",
@@ -97,6 +101,10 @@ const config: HardhatUserConfig = {
     outDir: "typechain",
     target: "ethers-v5",
   },
+  etherscan: {
+    apiKey: "RWNVM4YY577I58CZHRDUSKZJ4CVW3S31YM",
+  },
 };
 
 export default config;
+// --delay 259200 --admin 0xeA4A4A886aCA47DD0167B4aEE5B1345e18D20Ee5 --network mainnet
